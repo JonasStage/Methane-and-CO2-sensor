@@ -1,0 +1,2 @@
+This folder is dedicated to setting the real time clock (RTC) according to the computer clock. 
+The code should be uploaded prior to any of the sensor codes.
