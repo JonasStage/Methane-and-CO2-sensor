@@ -2,7 +2,7 @@ library(tidyverse);library(httr);library(jsonlite);library(circular);library(lub
 #Get DMI data from metObs v1 REST API
 
 # https://confluence.govcloud.dk/display/FDAPI
-#API key: 6f3caa2e-4ffb-4a73-9b7e-1bb2609608c6
+#API key: GET_YOUR_OWN_API_FROM_URL_ABOVE
 #Weather station: "Flakkebjerg", stationId=06135
 #Parameters: parameterId=wind_dir, parameterId=wind_speed
 #From 2013-01-01: from=1356998400000000
@@ -12,8 +12,7 @@ library(tidyverse);library(httr);library(jsonlite);library(circular);library(lub
 # time_to <- "2021-10-01T00:00:00Z" #Oct 2021
 
 get_kommune_data <- function(time_from , time_to , municipalityID = "0270", par = "mean_pressure", time_res = "hour"){
-  obs_key <- "6f3caa2e-4ffb-4a73-9b7e-1bb2609608c6"
-  climate_key <- "b6ec8007-4bb5-47c0-ab0f-1b912f21b06e"
+  climate_key <- GET_YOUR_OWN_API_FROM_URL_ABOVE
   stat <- "06135"
   par_dir <- "mean_wind_dir"
   par_wnd <- "mean_wind_speed"
@@ -39,8 +38,7 @@ get_kommune_data <- function(time_from , time_to , municipalityID = "0270", par 
 
   
 get_observation_data <- function(time_from , time_to , stationID = "06174", par = "precip_past1h"){
-    obs_key <- "6f3caa2e-4ffb-4a73-9b7e-1bb2609608c6"
-    climate_key <- "6f3caa2e-4ffb-4a73-9b7e-1bb2609608c6"
+    climate_key <- GET_YOUR_OWN_API_FROM_URL_ABOVE
     par_dir <- "mean_wind_dir"
     par_wnd <- "mean_wind_speed"
     par_pres <- "mean_pressure"
