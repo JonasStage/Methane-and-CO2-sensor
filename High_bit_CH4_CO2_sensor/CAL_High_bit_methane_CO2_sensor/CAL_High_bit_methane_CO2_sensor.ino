@@ -3,31 +3,21 @@
 // Thanks to cactus.io and Adafruit for code components. For setup of RTC, see separate logger shield documentation.
 #include <SPI.h>
 #include <Wire.h>
-#include <SimpleDHT.h>
 #include <RTClib.h>
-#include "cactus_io_DHT22.h"
+#include "DHT.h"
 #include <SdFat.h>
 #include "Arduino.h"
-#include <avr/sleep.h>
-#include <avr/wdt.h>
-#include <avr/power.h>
+#include <Adafruit_ADS1X15.h>
 SdFat SD;
 
 #define POWER_PIN 5                     // Used as a switch to turn sensors off when sleeping through D5 pin
 int SampleNumber = 0 ;                  // Used for sample number in output file
 int PumpCycle = 1 ;                     // Used for seperating pumpcycles 
 
-
 int sleepCnt = 0;                       // Used for counting number of sleeping mills
 
 /// Pump function
 const byte PUMP_PIN = 6;                // Pump turned on and off through D6 pin
-byte PUMP_STATE = LOW;                  // Pump starts turned off
-unsigned long previousMillis = 0;       // Used for knowing when it is time to start the pump
-unsigned long intervalOn = 1000;        // Duration pump is turned on. Not really used as pump is turned on during sleep, so set this value low (~1000)           
-unsigned long intervalOff= 2400000;     // Duration pump is off. If arduino sleeps between measurements this has to be calculated as this values is the turned on time. Pump starts after x miliseconds of on-time.
-unsigned long interval = intervalOff;   // The pump starts off
-int SleepMills = 150;                   // Number of mills to sleep while pump is turned on
 
 #define LOG_INTERVAL 2000               // Millisecond between logging entries (reduce to take more/faster data). milliseconds before writing the logged data permanently to disk. LOG_INTERVAL write each time (safest)
 #define SYNC_INTERVAL 5000              // Millisecond between calls to flush() - to write data to the card
@@ -36,12 +26,9 @@ uint32_t syncTime = 0;                  // Time of last sync()
 #define ECHO_TO_SERIAL   1              // If you want data to show in serial port
 #define WAIT_TO_START    0              // Wait for serial input in setup()
 
-#define DHT22_PIN 7                     // DHT22 (RH_T) data pin. here D7 pin.
-DHT22 dht(DHT22_PIN);                   // Initialize DHT sensor for normal 16mhz Arduino.
-#define DHTTYPE DHT22                   // DHT 22 version (AM2302), AM2321
+#define dht_pin 7                       // DHT22 (RH_T) data pin. here D7 pin.
+DHT dht;                                // Initialize DHT sensor for normal 16mhz Arduino.
 
-#define CH4sens A1                      // CH4 sensor Vout. A1 pin
-#define CH4ref A2                       // CH4 sensor Vref. A2 pin   
 #define Vb A0                           // Battery voltage. A0 pin
 int CH4s = 0;                           // Variables used to store data
 int CH4r = 0;                           // Variables used to store data
@@ -54,6 +41,11 @@ float steps = 1024;                     // Variables used to store data
 
 RTC_PCF8523 RTC;                        // define the Real Time Clock object
 
+Adafruit_ADS1115 ads;
+
+#define error_pin 4
+#define running_pin 3
+
 #define SD_CS_PIN 10                    // for the data logging shield, we use digital pin 10 for the SD cs line
 File logfile;                           // the logging file
 
@@ -61,7 +53,7 @@ void error(char *str)                   // Halt if error
 {
   Serial.print("error: ");
   Serial.println(str);
-  digitalWrite(13, HIGH); // red LED indicates error
+  digitalWrite(error_pin, HIGH); // red LED indicates error
   while (1); //halt command
 }
 
@@ -317,64 +309,16 @@ while(Wire.available()) {
   return ((double) -1); 
  }   
 } 
-
-///////////////////////////////////////////////////////////////////
-// Function : GoSleep(STATE, Mills)
-// STATE    : State of the pump (HIGH/LOW)
-// Mills    : Number of mills to sleep (1 mill = 8 seconds)
-///////////////////////////////////////////////////////////////////
-
-void GoSleep(byte STATE , int Mills ) {
-  byte prevADCSRA = ADCSRA;
-  ADCSRA = 0;
-   
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-  sleep_enable();
-  Serial.println("Good night!");
-  
-  while (sleepCnt < Mills){
-  digitalWrite(PUMP_PIN, STATE);
-  digitalWrite(POWER_PIN, STATE);
-  sleep_bod_disable();
-  noInterrupts();
-  MCUSR = 0;   // allow changes, disable reset
-  WDTCSR = bit (WDCE) | bit(WDE); // set interrupt mode and an interval
-  WDTCSR = bit (WDIE) | bit(WDP3) | bit(WDP0);    // set WDIE, and 8 second delay
-  wdt_reset();
-
-    // Send a message just to show we are about to sleep
-  Serial.print(sleepCnt + 1);
-  Serial.print(" out of ");
-  Serial.print(Mills);
-  Serial.println();
-  Serial.flush();
-  // Allow interrupts now
-  interrupts();
-
-    // And enter sleep mode as set above
-  sleep_cpu();
-  }
- // Prevent sleep mode, so we don't enter it again, except deliberately, by code
- sleep_disable();
-
-  // Wakes up at this point when timer wakes up µC
-  Serial.println("I'm awake!");
-  power_twi_enable();
-
-  // Reset sleep counter
-  sleepCnt = 0;
-  SampleNumber = 0;
-  // Re-enable ADC if it was previously running
-  ADCSRA = prevADCSRA;
-  }
   
 void setup(void)
 {
+  pinMode(error_pin, OUTPUT);
+  pinMode(running_pin, OUTPUT);
   pinMode(POWER_PIN, OUTPUT);
   pinMode(PUMP_PIN, OUTPUT); //Start pump
   Serial.begin(9600);
   Serial.println();
-  dht.begin(); //start RH_T_sensor
+  dht.setup(dht_pin); //start RH_T_sensor
   RTC.begin(); 
   digitalWrite(POWER_PIN, HIGH);
 
@@ -391,6 +335,10 @@ void setup(void)
   }
   Serial.println("card initialized.");
 
+if (!ads.begin(0x49)) {
+    error("Failed to initialize ADS.");
+    while (1);
+  }
 
   // connect to RTC
   Wire.begin();
@@ -423,6 +371,11 @@ void setup(void)
     logfile.close();
     Serial.println("millis,stampunix,datetime,RH%,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
 }
+
+digitalWrite(PUMP_PIN, HIGH); // Just to ensure the pump is functioning
+delay(3000);
+digitalWrite(PUMP_PIN, LOW);
+
 }
 
 char time_to_read_CO2 = 1;
@@ -434,6 +387,10 @@ void loop() {
   digitalWrite(POWER_PIN, HIGH);
 
   SampleNumber++;
+
+if ((SampleNumber % 9) == 0) {
+  initPoll();
+}
 
  if (time_to_read_CO2 == 1) {
     wakeSensor();
@@ -512,32 +469,35 @@ void loop() {
   Serial.print(now.second(), DEC);
   //Serial.print('"');
 #endif //ECHO_TO_SERIAL
-
+float rh,temp;
   // Reading temperature or humidity takes about 250 milliseconds.
   // Sensor readings may also be up to 2 seconds 'old' (its a slow sensor)
-  dht.begin(); //start RH_T_sensor
-  dht.readHumidity();
-  dht.readTemperature();
+rh = dht.getHumidity();
+temp = dht.getTemperature();
   // Check if any reads failed and exit early (to try again).
-  if (isnan(dht.humidity) || isnan(dht.temperature_C)) {
-    Serial.print("DHT fejl");
+  if (!dht.getStatusString() == "OK") {
+    error("DHT fejl");
     return;
   }
-  CH4s = analogRead(CH4sens); //read CH4 Vout
-  CH4smV = CH4s * (mV / steps); //convert pin reading to mV
-  delay(10); //delay between reading of different analogue pins adviced.
-  CH4r = analogRead(CH4ref); //read CH4 Vref
-  CH4rmV = CH4r * (mV / steps); //convert pin reading to mV
-  delay(10); //delay between reading of different analogue pins adviced.
+int16_t adc0, adc1, adc2, adc3 = 0;
+  float volts0, volts1, volts2, volts3 = 0;
+
+  adc0 = ads.readADC_SingleEnded(0);
+  delay(100);
+  adc1 = ads.readADC_SingleEnded(1);
+  delay(100);
+  CH4smV = ads.computeVolts(adc0)*1000;
+  delay(100);
+  CH4rmV = ads.computeVolts(adc1)*1000;
+  delay(100);
   Vbat = analogRead(Vb); //read CH4 Vref
   VbatmV = Vbat * (mV / steps); //convert pin reading to mV, NOT YET correcting for the voltage divider.
-  delay(10); //delay between reading of different analogue pins adviced.
 
   logfile = SD.open("datalog.csv", FILE_WRITE);
   logfile.print(", ");
-  logfile.print(dht.humidity);
+  logfile.print(rh);
   logfile.print(", ");
-  logfile.print(dht.temperature_C);
+  logfile.print(temp);
   logfile.print(", ");
   logfile.print(CH4smV);
   logfile.print(", ");
@@ -559,9 +519,9 @@ void loop() {
   logfile.close();
 #if ECHO_TO_SERIAL
   Serial.print(", ");
-  Serial.print(dht.humidity);
+  Serial.print(rh);
   Serial.print(", ");
-  Serial.print(dht.temperature_C);
+  Serial.print(temp);
   Serial.print(", ");
   Serial.print(CH4smV);
   Serial.print(", ");
@@ -585,6 +545,12 @@ void loop() {
   Serial.println();
 #endif // ECHO_TO_SERIAL
 
+if ((SampleNumber % 3) == 0) {
+    digitalWrite(running_pin, HIGH);
+    delay(10);
+    digitalWrite(running_pin, LOW);
+}
+
   if (time_to_read_CO2 == 0 ) {
     if (n_delay_wait < 9)
       n_delay_wait ++;
@@ -595,14 +561,7 @@ void loop() {
     }
   }
 
-unsigned long currentMillis1 = millis();  
-  if (currentMillis1 - previousMillis >= intervalOff) {
-    previousMillis = currentMillis1;
-    
-    GoSleep(HIGH , SleepMills);
-    PumpCycle++;
-    digitalWrite(PUMP_PIN, LOW);
-}
+
  
   // Now we write data to disk! Don't sync too often - requires 2048 bytes of I/O to SD card
   // which uses power and takes time
@@ -611,14 +570,3 @@ unsigned long currentMillis1 = millis();
   logfile.flush();  
 
 }
-// When WatchDog timer causes µC to wake it comes here
-ISR (WDT_vect) {
-
-  // Turn off watchdog, we don't want it to do anything (like resetting this sketch)
-  wdt_disable();
-
-  // Increment the WDT interrupt count
-  sleepCnt++;
-  // Now we continue running the main Loop() just after we went to sleep
-  time_to_read_CO2 == 1;
-  }
