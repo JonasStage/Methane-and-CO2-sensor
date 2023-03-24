@@ -13,14 +13,13 @@
 #include <Adafruit_ADS1X15.h>
 SdFat SD;
 
-#define POWER_PIN 5                     // Used as a switch to turn sensors off when sleeping through D5 pin
 int SampleNumber = 0 ;                  // Used for sample number in output file
 int PumpCycle = 1 ;                     // Used for seperating pumpcycles 
 
 int sleepCnt = 0;                       // Used for counting number of sleeping mills
 
 /// Pump function
-const byte PUMP_PIN = 6;                // Pump turned on and off through D6 pin
+#define PUMP_PIN 6                // Pump turned on and off through D6 pin
 byte PUMP_STATE = LOW;                  // Pump starts turned off
 unsigned long previousMillis = 0;       // Used for knowing when it is time to start the pump
 unsigned long intervalOn = 1000;        // Duration pump is turned on. Not really used as pump is turned on during sleep, so set this value low (~1000)           
@@ -336,7 +335,6 @@ void GoSleep(byte STATE , int Mills ) {
   
   while (sleepCnt < Mills){
   digitalWrite(PUMP_PIN, STATE);
-  digitalWrite(POWER_PIN, STATE);
   sleep_bod_disable();
   noInterrupts();
   MCUSR = 0;   // allow changes, disable reset
@@ -381,13 +379,11 @@ void setup(void)
 {
   pinMode(error_pin, OUTPUT);
   pinMode(running_pin, OUTPUT);
-  pinMode(POWER_PIN, OUTPUT);
   pinMode(PUMP_PIN, OUTPUT); //Start pump
   Serial.begin(9600);
   Serial.println();
   dht.setup(dht_pin); //start RH_T_sensor
   RTC.begin(); 
-  digitalWrite(POWER_PIN, HIGH);
 
     while (!Serial) {
     ;                              // wait for serial port to connect. Needed for native USB port only
@@ -451,7 +447,6 @@ char n_delay_wait = 0;
 
 void loop() {
   DateTime now;
-  digitalWrite(POWER_PIN, HIGH);
 
   SampleNumber++;
 
