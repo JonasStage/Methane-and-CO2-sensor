@@ -450,8 +450,8 @@ void loop() {
 
   SampleNumber++;
 
-if ((SampleNumber % 9) == 0) {
-  initPoll();
+if ((SampleNumber % 9) == 0) {      
+  initPoll();                      // Seems like CO2 sensor is not always responding, so we initialise it just to be sure
 }
 
  if (time_to_read_CO2 == 1) {
@@ -543,13 +543,13 @@ temp = dht.getTemperature();
   }
 int16_t adc0, adc1, adc2, adc3 = 0;
   float volts0, volts1, volts2, volts3 = 0;
-
+  
+  delay(100);
   adc0 = ads.readADC_SingleEnded(0);
   delay(100);
   adc1 = ads.readADC_SingleEnded(1);
   delay(100);
   CH4smV = ads.computeVolts(adc0)*1000;
-  delay(100);
   CH4rmV = ads.computeVolts(adc1)*1000;
   delay(100);
   Vbat = analogRead(Vb); //read CH4 Vref
