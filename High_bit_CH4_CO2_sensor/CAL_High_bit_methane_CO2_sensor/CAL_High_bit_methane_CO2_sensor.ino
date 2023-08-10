@@ -375,7 +375,7 @@ if (!ads.begin(0x49)) {
 digitalWrite(PUMP_PIN, HIGH); // Just to ensure the pump is functioning
 delay(3000);
 digitalWrite(PUMP_PIN, LOW);
-
+Serial.println("Running calibration code");
 }
 
 char time_to_read_CO2 = 1;
@@ -482,12 +482,12 @@ temp = dht.getTemperature();
 int16_t adc0, adc1, adc2, adc3 = 0;
   float volts0, volts1, volts2, volts3 = 0;
 
+  delay(100);
   adc0 = ads.readADC_SingleEnded(0);
   delay(100);
   adc1 = ads.readADC_SingleEnded(1);
   delay(100);
   CH4smV = ads.computeVolts(adc0)*1000;
-  delay(100);
   CH4rmV = ads.computeVolts(adc1)*1000;
   delay(100);
   Vbat = analogRead(Vb); //read CH4 Vref

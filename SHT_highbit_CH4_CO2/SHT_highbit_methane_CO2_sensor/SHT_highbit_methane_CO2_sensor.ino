@@ -4,7 +4,7 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <RTClib.h>
-#include "DHT.h"
+#include "Adafruit_SHT4x.h"
 #include <SdFat.h>
 #include "Arduino.h"
 #include <avr/sleep.h>
@@ -34,8 +34,7 @@ uint32_t syncTime = 0;                  // Time of last sync()
 #define ECHO_TO_SERIAL   1              // If you want data to show in serial port
 #define WAIT_TO_START    0              // Wait for serial input in setup()
 
-#define dht_pin 7                       // DHT22 (RH_T) data pin. here D7 pin.
-DHT dht;                                // Initialize DHT sensor for normal 16mhz Arduino.
+Adafruit_SHT4x sht4 = Adafruit_SHT4x(); // Definename for sht (temperature and RH)
 
 #define Vb A0                           // Battery voltage. A0 pin
 int CH4s = 0;                           // Variables used to store data
@@ -51,8 +50,7 @@ RTC_PCF8523 RTC;                        // define the Real Time Clock object
 
 Adafruit_ADS1115 ads;
 
-#define error_pin 4
-#define running_pin 3
+#define light_pin 4
 
 #define SD_CS_PIN 10                    // for the data logging shield, we use digital pin 10 for the SD cs line
 File logfile;                           // the logging file
@@ -61,7 +59,7 @@ void error(char *str)                   // Halt if error
 {
   Serial.print("error: ");
   Serial.println(str);
-  digitalWrite(error_pin, HIGH); // red LED indicates error
+  digitalWrite(light_pin, HIGH); // red LED indicates error
   while (1); //halt command
 }
 
@@ -356,9 +354,9 @@ void GoSleep(byte STATE , int Mills ) {
   MCUSR = 0;   // allow changes, disable reset
   WDTCSR = bit (WDIE);    // set WDIE, and 16 ms delay
   wdt_reset();
-  digitalWrite(running_pin, HIGH);
+  digitalWrite(light_pin, HIGH);
   sleep_cpu();
-  digitalWrite(running_pin, LOW);
+  digitalWrite(light_pin, LOW);
   sleepCnt--;
 }
  // Prevent sleep mode, so we don't enter it again, except deliberately, by code
@@ -377,12 +375,11 @@ void GoSleep(byte STATE , int Mills ) {
   
 void setup(void)
 {
-  pinMode(error_pin, OUTPUT);
-  pinMode(running_pin, OUTPUT);
+  pinMode(light_pin, OUTPUT);
+  pinMode(light_pin, OUTPUT);
   pinMode(PUMP_PIN, OUTPUT); //Start pump
   Serial.begin(9600);
   Serial.println();
-  dht.setup(dht_pin); //start RH_T_sensor
   RTC.begin(); 
 
     while (!Serial) {
@@ -403,6 +400,10 @@ if (!ads.begin(0x49)) {
     while (1);
   }
 
+if (! sht4.begin()) {
+    error("Couldn't find SHT4x");
+    while (1);
+  }
   // connect to RTC
   Wire.begin();
   if (!RTC.begin()) {
@@ -425,14 +426,14 @@ if (!ads.begin(0x49)) {
     Serial.println("datalog.csv exists.");
     File logfile = SD.open("datalog.csv", FILE_WRITE);
     logfile.close();
-    Serial.println("millis,stampunix,datetime,RH%,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
+    Serial.println("millis,stampunix,datetime,RH,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
 } else {
     Serial.println("datalog.csv doesn't exist.");
     Serial.println("Creating datalog.csv...");
     logfile = SD.open("datalog.csv", FILE_WRITE);
-    logfile.println("millis,stampunix,datetime,RH%,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
+    logfile.println("millis,stampunix,datetime,RH,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
     logfile.close();
-    Serial.println("millis,stampunix,datetime,RH%,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
+    Serial.println("millis,stampunix,datetime,RH,tempC,CH4smV, CH4rmV, VbatmV, K33_RH, K33_Temp, K33_CO2, SampleNumber, PumpCycle");
 }
 
 digitalWrite(PUMP_PIN, HIGH); // Just to ensure the pump is functioning
@@ -531,16 +532,11 @@ if ((SampleNumber % 9) == 0) {
   Serial.print(now.second(), DEC);
   //Serial.print('"');
 #endif //ECHO_TO_SERIAL
-float rh,temp;
+sensors_event_t rh,temp;
   // Reading temperature or humidity takes about 250 milliseconds.
   // Sensor readings may also be up to 2 seconds 'old' (its a slow sensor)
-rh = dht.getHumidity();
-temp = dht.getTemperature();
-  // Check if any reads failed and exit early (to try again).
-  if (!dht.getStatusString() == "OK") {
-    error("DHT fejl");
-    return;
-  }
+sht4.getEvent(&rh, &temp);// populate temp and humidity objects with fresh data
+
 int16_t adc0, adc1, adc2, adc3 = 0;
   float volts0, volts1, volts2, volts3 = 0;
   
@@ -557,9 +553,9 @@ int16_t adc0, adc1, adc2, adc3 = 0;
 
   logfile = SD.open("datalog.csv", FILE_WRITE);
   logfile.print(", ");
-  logfile.print(rh);
+  logfile.print(rh.relative_humidity);
   logfile.print(", ");
-  logfile.print(temp);
+  logfile.print(temp.temperature);
   logfile.print(", ");
   logfile.print(CH4smV);
   logfile.print(", ");
@@ -581,9 +577,9 @@ int16_t adc0, adc1, adc2, adc3 = 0;
   logfile.close();
 #if ECHO_TO_SERIAL
   Serial.print(", ");
-  Serial.print(rh);
+  Serial.print(rh.relative_humidity);
   Serial.print(", ");
-  Serial.print(temp);
+  Serial.print(temp.temperature);
   Serial.print(", ");
   Serial.print(CH4smV);
   Serial.print(", ");
@@ -608,9 +604,9 @@ int16_t adc0, adc1, adc2, adc3 = 0;
 #endif // ECHO_TO_SERIAL
 
 if ((SampleNumber % 3) == 0) {
-    digitalWrite(running_pin, HIGH);
+    digitalWrite(light_pin, HIGH);
     delay(10);
-    digitalWrite(running_pin, LOW);
+    digitalWrite(light_pin, LOW);
 }
 
   if (time_to_read_CO2 == 0 ) {
