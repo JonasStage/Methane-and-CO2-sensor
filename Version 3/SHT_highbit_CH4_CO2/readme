@@ -1,3 +1,5 @@
 This folder is dedicated to the high-bit (16) version of CH4 and CO2 sensor with SHT temperature and humidity sensor.
+
 Two of the folders contain similar code for the Arduino, however, the one starting with CAL is used when calibrating the sensors, whereas the other is used for measuring.
+
 The last folder entitled PCB, contains the Gerber files, bill of materials (BOM) and component placement list (CPL), which are used when ordering printed circuit boards (PCB). In this example, the website JLCPCB has been used. By uploading the gerber file to JLCPCB and choosing PCB assembly you can then upload the BOM and CPL to automatic place the components. JLCPCB does not have the connector for the battery or air pump, Figaro CH4 sensor, K33 CO2 sensor, Adafruit data logger shield and Arduino, and thus these must be bought elsewhere.
