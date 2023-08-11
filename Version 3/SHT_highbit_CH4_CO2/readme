@@ -1,1 +1,2 @@
-This folder is dedicated to the high bit (16) version of CH4 and CO2 sensor with SHT temperature and humidity sensor.
+This folder is dedicated to the high-bit (16) version of CH4 and CO2 sensor with SHT temperature and humidity sensor.
+Two of the folders contain similar code for the Arduino, however, the one starting with CAL is used when calibrating the sensors, whereas the other is used for measuring.
