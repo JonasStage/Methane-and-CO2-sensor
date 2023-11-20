@@ -7,7 +7,7 @@ Everything is licensed under the MIT License.
 As of this moment, the newest version is version 3. 
 Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in the following paper :
 
-![Skærmbillede 2023-08-14 kl  10 37 44](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/10abd25c-fb6c-43a7-9ec8-78023548e7cf)
+![Sensor 3 schematics](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/2c3ce5b2-02a9-4820-9a6d-4ef11cffb5e9)
 
 
 Citations
