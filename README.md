@@ -1,7 +1,7 @@
 # CH<sub>4</sub> and CO<sub>2</sub> DIY sensor with automated aeration
 
-This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø (Sø et al., 2023). 
-Sensors are made following Bastviken et al. (2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
+This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø [(Sø et al., 2023)](https://doi.org/10.1016/j.scitotenv.2023.162895). 
+Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-17-3659-2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
 
 ------------------
 
@@ -48,14 +48,3 @@ As of this moment, the newest version is version 3.
 Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in an upcoming paper.
 
 ![Skærmbillede 2023-08-14 kl  10 37 44 2](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/85bc4e85-a9ac-4017-9cfc-d753d11304c8) ![Billede1](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/3e51f4ee-0072-430b-99f7-15fcb3a9be2a)
-
-
-
-------------------
-
-Citations
-
-
-Sø, J. S., Sand-Jensen, K., Martinsen, K. T., Polauke, E., Kjær, J. E., Reitzel, K., & Kragh, T. (2023). Methane and carbon dioxide fluxes at high spatiotemporal resolution from a small temperate lake. Science of the Total Environment, 878, 162895. doi:https://doi.org/10.1016/j.scitotenv.2023.162895
-
-  Bastviken, D., Nygren, J., Schenk, J., Parellada Massana, R., and Duc, N. T.: Technical note: Facilitating the use          of low-cost methane (CH4) sensors in flux chambers – calibration, data processing, and an open-source make-it-yourself logger, Biogeosciences, 17, 3659–3667, https://doi.org/10.5194/bg-17-3659-2020, 2020.
