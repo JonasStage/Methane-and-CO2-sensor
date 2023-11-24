@@ -1,11 +1,13 @@
 This repository is dedicated to CH4 and CO2 sensors created by Jonas Stage Sø (Sø et al., 2023). 
-Sensors are made following Bastviken et al. (2020), however modified for automated fluxes and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. Furthermore, high bit sensors and methane divers were created. 
+Sensors are made following Bastviken et al. (2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
+
 Files include PCB designs and code for setting up sensors and processing data.
+
 Everything is licensed under the MIT License.
 
 
 As of this moment, the newest version is version 3. 
-Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in the following paper :
+Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in an upcoming paper.
 
 ![Sensor 3 schematics](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/2c3ce5b2-02a9-4820-9a6d-4ef11cffb5e9)
 
