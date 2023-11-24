@@ -1,16 +1,16 @@
-# CH4 and CO2 DIY sensor with automated aeration
+# CH<sub>4</sub> and CO<sub>2</sub> DIY sensor with automated aeration
 
-This repository is dedicated to CH4 and CO2 sensors created by Jonas Stage Sø (Sø et al., 2023). 
+This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø (Sø et al., 2023). 
 Sensors are made following Bastviken et al. (2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
 
 ------------------
 
-# A step-by-step guide to building methane and CO2 sensors and an automated floating chamber
+# A step-by-step guide to building methane and CO<sub>2</sub> sensors and an automated floating chamber
 
 
 ## Building the sensor
 * Buy all the equipment from the [Equipment list](Version%203/SHT_highbit_CH4_CO2/Equipment%20list.docx). Most items can be bought from your PCB manufacturer, however, some parts need to be bought from other companies. Additionally, a soldering iron, flux pen, solder wire and solder wick are needed.
-* Solder four pin headers to the K33 ELG CO2 sensor, so they and the screws match the lineups on the PCB. 
+* Solder four pin headers to the K33 ELG CO<sub>2</sub> sensor, so they and the screws match the lineups on the PCB. 
 * Solder the remaining parts to the PCB. 
 * Add a battery to the Adafruit Datalogger shield to power the real-time-clock (RTC).
 * Download the Arduino IDE, which can be downloaded from the [Arduino website](https://www.arduino.cc/en/software).
