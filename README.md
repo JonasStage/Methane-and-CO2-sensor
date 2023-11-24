@@ -13,8 +13,8 @@ Sensors are made following Bastviken et al. (2020), modified for automated fluxe
 * Solder four pin headers to the K33 ELG CO2 sensor, so they and the screws match the lineups on the PCB. 
 * Solder the remaining parts to the PCB. 
 * Add a battery to the Adafruit Datalogger shield to power the real-time-clock (RTC).
-* Download the Arduino IDE, which can be downloaded from the Arduino website.
-* Download the Arduino sketch for the sensor and the RTC. Make sure to download and install the needed libraries first. 
+* Download the Arduino IDE, which can be downloaded from the [Arduino website](https://www.arduino.cc/en/software).
+* Download the Arduino sketch for the [sensor](Version%203/SHT_highbit_CH4_CO2/SHT_highbit_methane_CO2_sensor/SHT_highbit_methane_CO2_sensor.ino) and the [RTC](RTC/RTC_set/RTC_set.ino). Make sure to download and install the needed [libraries](Arduino%libraries) first. 
 * Start by uploading the RTC sketch using the Arduino IDE, to set the clock to the time of the computer. This is done by selecting the port that is connected to the Arduino and pressing the Upload bottom (Arrow).
 * Then upload the sensor sketch similarly to the previous step.
 * The sensor should now be running. You might not get values from the K33 ELG CO2 sensor if you only power the sensor through USB as it needs at least 9 V. 
