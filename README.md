@@ -41,9 +41,6 @@ Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-
 
 Files include PCB designs and code for setting up sensors and processing data.
 
-Everything is licensed under the MIT License.
-
-
 As of this moment, the newest version is version 3. 
 Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in an upcoming paper.
 
