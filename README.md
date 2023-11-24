@@ -1,3 +1,5 @@
+## CH4 and CO2 DIY sensor with automated aeration
+
 This repository is dedicated to CH4 and CO2 sensors created by Jonas Stage Sø (Sø et al., 2023). 
 Sensors are made following Bastviken et al. (2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
 
