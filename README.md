@@ -9,7 +9,7 @@ Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-
 
 
 ## Building the sensor
-* Buy all the equipment from the [Equipment list](Version%203/SHT_highbit_CH4_CO2/Equipment%20list.docx). Most items can be bought from your PCB manufacturer, however, some parts need to be bought from other companies. Additionally, a soldering iron, flux pen, solder wire and solder wick are needed.
+* Buy all the equipment from the [Equipment list](Version%203/SHT_highbit_CH4_CO2/Equipment%20list.docx). Most items can be bought from your PCB manufacturer, however, some parts need to be bought from other companies. A bill of materials (BOM) and component placement list (CPL) is available, which includes parts numbers for JLCPCB, thus many of the parts can be assemblied by the PCB manufacturer which is advised.  Additionally, a soldering iron, flux pen, solder wire and solder wick are needed.
 * Solder four pin headers to the K33 ELG CO<sub>2</sub> sensor, so they and the screws match the lineups on the PCB. 
 * Solder the remaining parts to the PCB. 
 * Add a battery to the Adafruit Datalogger shield to power the real-time-clock (RTC).
