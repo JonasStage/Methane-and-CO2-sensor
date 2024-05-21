@@ -376,7 +376,6 @@ void GoSleep(byte STATE , int Mills ) {
 void setup(void)
 {
   pinMode(light_pin, OUTPUT);
-  pinMode(light_pin, OUTPUT);
   pinMode(PUMP_PIN, OUTPUT); //Start pump
   Serial.begin(9600);
   Serial.println();

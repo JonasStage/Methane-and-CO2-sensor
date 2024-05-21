@@ -36,6 +36,7 @@ RTC_PCF8523 RTC;                        // define the Real Time Clock object
 Adafruit_ADS1115 ads;
 
 #define light_pin 4
+#define PUMP_PIN 6                // Pump turned on and off through D6 pin
 
 #define SD_CS_PIN 10                    // for the data logging shield, we use digital pin 10 for the SD cs line
 File logfile;                           // the logging file
@@ -51,6 +52,7 @@ void error(char *str)                   // Halt if error
 void setup(void)
 {
   pinMode(light_pin, OUTPUT);
+  pinMode(PUMP_PIN, OUTPUT); //Start pump
   Serial.begin(9600);
   Serial.println();
   RTC.begin(); 
@@ -116,6 +118,7 @@ char n_delay_wait = 0;
 
 
 void loop() {
+  digitalWrite(PUMP_PIN, HIGH); // Just to ensure the pump is functioning
   DateTime now;
   SampleNumber++;
 
