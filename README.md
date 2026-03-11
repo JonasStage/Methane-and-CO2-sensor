@@ -1,7 +1,9 @@
 # CH<sub>4</sub> and CO<sub>2</sub> DIY sensor with automated aeration
 
-This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø [(Sø et al.,2024)](https://doi.org/10.1029/2024JG008035) and [(Sø et al., 2023)](https://doi.org/10.1016/j.scitotenv.2023.162895). 
+This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø [(Sø et al., 2024)](https://doi.org/10.1029/2024JG008035) and [(Sø et al., 2023)](https://doi.org/10.1016/j.scitotenv.2023.162895). 
 Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-17-3659-2020), modified for automated fluxes, higher resolution and lower power consumption by Jonas Stage Sø, University of Southern Denmark, Denmark. 
+
+I'm hoping to make a video on how to order and assemble the sensor soon. 
 
 ------------------
 
@@ -46,3 +48,6 @@ As of this moment, the latest version is version 4.
 Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in the mentioned paper.
 
 ![Version 4](Version%204/V4.png)
+
+## Calibrating the CO<sub>2</sub> sensor
+The CO<sub>2</sub> sensor can be calibrated to background concentration or 0 concentration. This is done by shorting two connections on the sensor. To initiate the background calibration, on the photo above, the two pins that should be connected have a pin header soldered to them. To find more information visit the [CO<sub>2</sub> sensors website](https://senseair.com/product/k33-elg/).
