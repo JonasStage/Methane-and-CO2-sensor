@@ -38,10 +38,12 @@ Additionally, a soldering iron, flux pen, solder wire and solder wick are needed
 * Then upload the desired sensor sketch which can be found [here](Version%204/Arduino%20code/).
 * The sensor should now be running. You might not get values from the K33 ELG CO2 sensor if you only power the sensor through the USBASP ISP as it needs at least 9 V. 
 * To view the data output turn off the sensor and readout the SD card to find the datalog.csv file.
-* For connection from a 12 V battery to the sensor, a two-conductor wire needs to be connected to the battery. Make sure the polarity is correct.
-<br>
-I'm hoping to make a video on how to order and assemble the sensor soon. 
+* For connection from a 12 V battery to the sensor, a two-conductor wire needs to be connected to the battery. Make sure the polarity is correct.  
 
+> [!WARNING]  
+> All Figaro CH4 sensors should be calibrated to achieve the correct calibration coefficient. See [(Sø et al., 2024)](https://doi.org/10.1029/2024JG008035) for more information.   
+
+I'm hoping to make a video on how to order and assemble the sensor soon. 
 
 ### Building the chamber
 * A bucket has been used to build these sensors, it’s important however that tests and considerations are made if changing the dimensions of the bucket, as this might cause the sensor to be too close to the water surface and thereby be shorted due to water damage. Here a bucket with a volume of 13.5 l and surface area of 0.0615 m2 is used.
