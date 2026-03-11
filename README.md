@@ -7,6 +7,13 @@ I'm hoping to make a video on how to order and assemble the sensor soon.
 
 ------------------
 
+# Version 4
+I finally found the time to create the new version 4 of the sensor, which brings quite some upgrades!<br>
+* The new version implements the arduino and the datalogging shield from the version 3 into the same PCB as all the sensors, which means that there are less items you need to buy and it is cheaper. 
+* The new version implements the Figaro TGS2611-E00 methane sensor rather than the NGM2611-E13 which was used on the previous version. The TGS2611-E00 is actually the same sensor as used on the NGM2611-E13, but by utilizing the TGS2611-E00 the costs are lowered, and it allows you to use the socket (SR-6), such that the sensor can easily be replaced. Just make sure the orientation of the sensor is correct. The notch on the sensor should align with the footprint on the PCB. The PCB now allows the user to break off the small part, which holds the methane sensor. This part is then soldered onto the board, ensuring the pins A, B, C and D are correctly placed to reduce the height of the sensor
+* One downside to this is that you have to use an other Arduino Core and this core should be installed in the Arduino IDE. In the version 4 we will use the [MiniCore](https://github.com/MCUdude/Minicore). You also need an USBASP ISP which is basically a programmer for the sensor, which allows you to upload the code to your sensor.
+* The new version of the sensor has also recieved some minor updates to the code. The sensor now has three LEDs, one that is always turned on when the sensor is powered, this LED is labeled 'Power LED'. Another LED is located closed to the SD card holder, it is labeled 'SD LED' and blinks whenever data is written to the SD card. The last LED is labeled 'Status LED', this LED provides feedback on whether the sensor is running as expected. In the event of a corrupt SD card, or in case the sensor cannot connect the CO2 sensor, temperature and humidity sensor or the analog-to-digital chip, that reads out the methane sensor, the LED will be continous, and action must be taken. If the LED lights up every 3 sampling (6 seconds) then no errors have been detected. 
+
 # A step-by-step guide to building methane and CO<sub>2</sub> sensors and an automated floating chamber
 
 
@@ -17,10 +24,14 @@ Additionally, a soldering iron, flux pen, solder wire and solder wick are needed
 * Install the coin-cell battery to power the real-time-clock (RTC).
 * Install the SD card. 
 * Download the Arduino IDE, which can be downloaded from the [Arduino website](https://www.arduino.cc/en/software).
-* Download the [Arduino sketch for the sensor](Version%204/Arduino%20code) and the [RTC](RTC/RTC_set/RTC_set.ino). Make sure to download and install the needed [libraries](Arduino%20libraries/) first. 
-* Start by uploading the RTC sketch using the Arduino IDE, to set the clock to the time of the computer. This is done by selecting the port that is connected to the Arduino and pressing the Upload bottom (Arrow).
-* Then upload the sensor sketch similarly to the previous step.
-* The sensor should now be running. You might not get values from the K33 ELG CO2 sensor if you only power the sensor through USB as it needs at least 9 V. 
+* Download the [Arduino sketch for the sensor](Version%204/Arduino%20code) and the [RTC](RTC/RTC_set/RTC_set.ino). Make sure to download and install the needed [libraries](Arduino%20libraries/) first.
+* Install MiniCore by following the [instructions here](https://github.com/MCUdude/Minicore?tab=readme-ov-file#how-to-install).
+* Connect the sensor to your computer using the USBASP ISP.
+* Find the 'Tools' menubar. Under Board > MiniCore > ATmega328
+* Changes the options so it looks like this ![Tools options](Images/Arduino%20tools.png) 
+* Start by uploading the RTC sketch using the Arduino IDE, to set the clock to the time of the computer. This is done by pressing the Upload bottom (Arrow).
+* Then upload the desired sensor sketch which can be found [here](Version%204/Arduino%20code/).
+* The sensor should now be running. You might not get values from the K33 ELG CO2 sensor if you only power the sensor through the USBASP ISP as it needs at least 9 V. 
 * To view the data output turn off the sensor and readout the SD card to find the datalog.csv file.
 * For connection from a 12 V battery to the sensor, a two-conductor wire needs to be connected to the battery. Make sure the polarity is correct.
 
