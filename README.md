@@ -5,11 +5,11 @@ Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-
 
 ## Table of contents
 
-* [Latest version](https://github.com/JonasStage/Methane-and-CO2-sensor/edit/main/README.md#latest-version)
-* [Step-by-step guide](https://github.com/JonasStage/Methane-and-CO2-sensor/edit/main/README.md#a-step-by-step-guide-to-building-methane-and-co2-sensors-and-an-automated-floating-chamber)
-  * [Sensor](https://github.com/JonasStage/Methane-and-CO2-sensor/edit/main/README.md#building-the-sensor)
-  * [Chamber](https://github.com/JonasStage/Methane-and-CO2-sensor/edit/main/README.md#building-the-chamber)
-* [Calibrating the CO<sub>2</sub> sensor](https://github.com/JonasStage/Methane-and-CO2-sensor/edit/main/README.md#calibrating-the-co2-sensor)
+* [Latest version](https://github.com/JonasStage/Methane-and-CO2-sensor#latest-version)
+* [Step-by-step guide](https://github.com/JonasStage/Methane-and-CO2-sensor#a-step-by-step-guide-to-building-methane-and-co2-sensors-and-an-automated-floating-chamber)
+  * [Sensor](https://github.com/JonasStage/Methane-and-CO2-sensor#building-the-sensor)
+  * [Chamber](https://github.com/JonasStage/Methane-and-CO2-sensor#building-the-chamber)
+* [Calibrating the CO<sub>2</sub> sensor](https://github.com/JonasStage/Methane-and-CO2-sensor#calibrating-the-co2-sensor)
 
 ## Latest version
 I finally found the time to create the new version 4 of the sensor, which brings quite some upgrades!<br>
