@@ -45,4 +45,4 @@ Files include PCB designs and code for setting up sensors and processing data.
 As of this moment, the latest version is version 4. 
 Comparisons of this sensor against a Los Gatos Research Microportable Greenhouse Gas Analyzer (GLA131-GPC AAB, Switzerland), can be found in the mentioned paper.
 
-![Billede1](https://github.com/JonasStage/Methane-and-CO2-sensor/assets/57667863/3e51f4ee-0072-430b-99f7-15fcb3a9be2a)
+![Version 4](Version%204/V4.png)
