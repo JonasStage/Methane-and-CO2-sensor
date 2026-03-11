@@ -30,7 +30,7 @@ Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-
 Version 4 brings several upgrades:
 
 * The Arduino and datalogging shield from Version 3 are now integrated into a single PCB — fewer parts, lower cost.
-* Switched from the NGM2611-E13 to the **Figaro TGS2611-E00** methane sensor. The TGS2611-E00 uses the SR-6 socket so the sensor can be replaced without soldering. Align the notch on the sensor with the footprint on the PCB. The methane sensor section can be broken off the PCB and soldered back to reduce overall height.
+* Switched from the NGM2611-E13 to the **Figaro TGS2611-E00** methane sensor. The TGS2611-E00 uses the SR-6 socket so the sensor can be replaced without soldering. Align the notch on the sensor with the footprint on the PCB. The methane sensor section have be broken off the PCB and soldered back to reduce overall height.
 * Requires the **[MiniCore](https://github.com/MCUdude/MiniCore)** board package and a **USBASP ISP** programmer for uploading sketches.
 * Three status LEDs:
   * **Power LED** — on whenever the sensor is powered
@@ -81,7 +81,7 @@ Version 4 brings several upgrades:
 
 ## Calibrating the CO<sub>2</sub> sensor
 
-The K33 ELG CO<sub>2</sub> sensor can be calibrated to ambient background concentration or to 0 ppm by shorting two pins on the sensor (a pin header is pre-soldered to these pins on the PCB). For details, see the [SenseAir K33 ELG product page](https://senseair.com/product/k33-elg/).
+The K33 ELG CO<sub>2</sub> sensor can be calibrated to 400 or 0 ppm by shorting two pins on the sensor. For details, see the [SenseAir K33 ELG product page](https://senseair.com/product/k33-elg/).
 
 ---
 
