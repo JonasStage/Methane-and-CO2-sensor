@@ -41,6 +41,9 @@ Version 4 brings several upgrades:
 
 ## A step-by-step guide to building methane and CO<sub>2</sub> sensors and an automated floating chamber
 
+> [!NOTE]
+> Find all of this a bit too technical? Reach out to me and we can talk about collaborative possibilities at Jonassoe@biology.sdu.dk.
+
 ### Building the sensor
 
 1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). Order the PCB from [JLCPCB](https://jlcpcb.com/) by uploading [`hardware/pcb/gerber.zip`](hardware/pcb/gerber.zip) and enabling PCB assembly with [`hardware/pcb/bom.csv`](hardware/pcb/bom.csv) and [`hardware/pcb/cpl.csv`](hardware/pcb/cpl.csv). Tick **"Confirm Parts Placement"**. A soldering iron, flux pen, solder wire, and solder wick are also needed.
