@@ -1,6 +1,6 @@
 # Required Arduino libraries
 
-Install all libraries below via **Sketch → Include Library → Manage Libraries…** in the Arduino IDE, or download from the links provided.
+Install all libraries below via **Sketch → Include Library → Manage Libraries…** in the Arduino IDE, or download the zip file to upload manually.
 
 | Library | Install via Library Manager | GitHub |
 |---------|-----------------------------|--------|
