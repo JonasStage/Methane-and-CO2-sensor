@@ -22,7 +22,7 @@
 | USBASP isp | 1 | 1-5 | Buy from AliExpress or Ebay | [Fischl](https://www.fischl.de/usbasp/) | Link is to the creator, but can be bought from many places, just google |
 | 12 V battery | 1 | 168.30 | 12.8 V 12 Ah LiFePO4 | [RS Components](https://dk.rs-online.com/web/p/genopladelige-batteripakker/1828654) | Price varies with capacity |
 
-**Total (without battery): ~€127**
-**Total (with battery): ~€295**
+**Total (without battery): ≈€130**
+**Total (with battery): ≈€300**
 
 > Prices may change over time.
