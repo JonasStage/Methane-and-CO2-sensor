@@ -46,23 +46,40 @@ Version 4 brings several upgrades:
 
 ### Building the sensor
 
-1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). Order the PCB from [JLCPCB](https://jlcpcb.com/) by uploading [`hardware/pcb/gerber.zip`](hardware/pcb/gerber.zip) and enabling PCB assembly with [`hardware/pcb/bom.csv`](hardware/pcb/bom.csv) and [`hardware/pcb/cpl.csv`](hardware/pcb/cpl.csv). Tick **"Confirm Parts Placement"**. A soldering iron, flux pen, solder wire, and solder wick are also needed.
+1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). Order the PCB from [JLCPCB](https://jlcpcb.com/) by uploading [`hardware/pcb/gerber.zip`](hardware/pcb/gerber.zip) and enabling PCB assembly with [`hardware/pcb/bom.csv`](hardware/pcb/bom.csv) and [`hardware/pcb/cpl.csv`](hardware/pcb/cpl.csv). A soldering iron, flux pen, solder wire, and solder wick are also needed.
 2. Solder four pin headers to the K33 ELG CO<sub>2</sub> sensor so the pins and screws align with the PCB footprint.
 3. Install the coin-cell battery (CR1220) to power the real-time clock (RTC).
 4. Insert the SD card.
-5. Download and install the [Arduino IDE](https://www.arduino.cc/en/software).
-6. Install all required [libraries](libraries/README.md).
-7. Install MiniCore following the [instructions here](https://github.com/MCUdude/MiniCore?tab=readme-ov-file#how-to-install).
-8. Connect the sensor to your computer via the USBASP ISP.
-9. In the Arduino IDE, go to **Tools → Board → MiniCore → ATmega328** and set the options to match: <br><img src="docs/Arduino_tools.png" width="250"><br>
-10. Upload [`firmware/rtc_setup/RTC_set.ino`](firmware/rtc_setup/RTC_set.ino) first to synchronise the RTC with your computer clock.
-11. Then upload the desired sketch from [`firmware/`](firmware/):
+
+### Flashing the code onto the sensor 
+
+#### Using the SensorUploader.jar file 
+1. Download and install the [Java Delevopment Kit](https://www.oracle.com/au/java/technologies/downloads/). Remember to select the correct operating system before downloading.
+2. Download the [SensorUploader program](firmware/SensorUploader%20program).
+3. Open the file using Java.
+4. Now install the prerequisites by pressing the button **Install Prerequisites**
+5. If running on a windows computer, you might be directed the Zadig website. This is because your computer is missing the Libusb-win32 driver. This driver is pre-installed on Mac and Linux.
+6. Install Zadig.
+7. Run Zadig to install the driver as shown. <br><img src="firmware/SensorUploader%20program/Zadig.png" width="250"><br>
+8. After the driver installation is done, return to the SensorUploader program and run the **Install Prerequisites** again to be sure all is correct.
+9. Set the **Measurement duration** and **Flushing duration**
+10. Press **Upload to Sensor**. This will take some time, and you might get a couple of warnings and errors, but hopefully the status bar should indicate that all went as planned. 
+
+#### Using the Arduino IDE
+1. Download and install the [Arduino IDE](https://www.arduino.cc/en/software).
+2. Install all required [libraries](libraries/README.md).
+3. Install MiniCore following the [instructions here](https://github.com/MCUdude/MiniCore?tab=readme-ov-file#how-to-install).
+4. Connect the sensor to your computer via the USBASP ISP.
+5. In the Arduino IDE, go to **Tools → Board → MiniCore → ATmega328** and set the options to match: <br><img src="docs/Arduino_tools.png" width="250"><br>
+6. Press **Burn Bootloader**
+7. Now upload [`firmware/rtc_setup/RTC_set.ino`](firmware/rtc_setup/RTC_set.ino) first to synchronise the RTC with your computer clock by going to **Sketch → Upload Using Programmer**.
+8. Then upload the desired sketch from [`firmware/`](firmware/) in the same way **Sketch → Upload Using Programmer**:
     * [`firmware/normal_run/Normal_run_code.ino`](firmware/normal_run/Normal_run_code.ino) — standard deployment (40 min measure / 20 min vent cycle)
     * [`firmware/no_pump/No_pump_code.ino`](firmware/no_pump/No_pump_code.ino) — continuous logging without pump
     * [`firmware/calibration/Calibration_code.ino`](firmware/calibration/Calibration_code.ino) — continuous run for calibration
-12. The sensor is now running. Note: the K33 CO<sub>2</sub> sensor requires at least 9 V — it will not respond when powered only through the USBASP ISP.
-13. To read data, power off the sensor and open `datalog.csv` from the SD card.
-14. For field deployment, connect a 12 V battery using a two-conductor wire. Observe correct polarity.
+9. The sensor is now running. Note: the K33 CO<sub>2</sub> sensor requires at least 9 V — it will not respond when powered only through the USBASP ISP.
+10. To read data, power off the sensor and open `datalog.csv` from the SD card.
+11. For field deployment, connect a 12 V battery using a two-conductor wire. Observe correct polarity.
 
 > [!WARNING]
 > All Figaro CH₄ sensors must be calibrated to obtain the correct calibration coefficient. See [(Sø et al., 2024)](https://doi.org/10.1029/2024JG008035) for details.
