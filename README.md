@@ -19,6 +19,7 @@ Sensors are made following [Bastviken et al. (2020)](https://doi.org/10.5194/bg-
 
 * [Latest version](#latest-version)
 * [Step-by-step guide](#a-step-by-step-guide-to-building-methane-and-co2-sensors-and-an-automated-floating-chamber)
+  * [Ordering the PCB](#ordering-the-pcb)
   * [Building the sensor](#building-the-sensor)
   * [Building the chamber](#building-the-chamber)
 * [Calibrating the CO<sub>2</sub> sensor](#calibrating-the-co2-sensor)
@@ -44,9 +45,14 @@ Version 4 brings several upgrades:
 > [!NOTE]
 > Find all of this a bit too technical? Reach out to me and we can talk about collaborative possibilities at Jonassoe@biology.sdu.dk.
 
+### Ordering the PCB 
+A video of how to order the PCB (printed curcuit board) can be found here. Minor changes have since been made to the gerber file. 
+Visit [JLCPCB](https://jlcpcb.com/) to order the PCB, this is done by uploading [`hardware/pcb/gerber.zip`](hardware/pcb/gerber.zip) and enabling PCB assembly with [`hardware/pcb/bom.csv`](hardware/pcb/bom.csv) and [`hardware/pcb/cpl.csv`](hardware/pcb/cpl.csv).<br><br>
+[![Youtube Video](https://github.com/user-attachments/assets/46653521-3721-4e8d-9565-89bc2ce3a6d6)](https://www.youtube.com/watch?v=w76-FkEEgp0)
+
 ### Building the sensor
 
-1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). Order the PCB from [JLCPCB](https://jlcpcb.com/) by uploading [`hardware/pcb/gerber.zip`](hardware/pcb/gerber.zip) and enabling PCB assembly with [`hardware/pcb/bom.csv`](hardware/pcb/bom.csv) and [`hardware/pcb/cpl.csv`](hardware/pcb/cpl.csv). A soldering iron, flux pen, solder wire, and solder wick are also needed.
+1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). A soldering iron, flux pen, solder wire, and solder wick are also needed.
 2. Solder four pin headers to the K33 ELG CO<sub>2</sub> sensor so the pins and screws align with the PCB footprint.
 3. Install the coin-cell battery (CR1220) to power the real-time clock (RTC).
 4. Insert the SD card.
