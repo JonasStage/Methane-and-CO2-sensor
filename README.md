@@ -55,7 +55,7 @@ Visit [JLCPCB](https://jlcpcb.com/) to order the PCB, this is done by uploading 
 1. Buy all items from the [equipment list](hardware/pcb/equipment_list.md). A soldering iron, flux pen, solder wire, and solder wick are also needed.
 2. Solder four pin headers to the K33 ELG CO<sub>2</sub> sensor so the pins and screws align with the PCB footprint.
 3. Install the coin-cell battery (CR1220) to power the real-time clock (RTC).
-4. Insert the SD card.
+4. Insert the SD card (FAT32 format).
 
 ### Flashing the code onto the sensor 
 
