@@ -14,8 +14,8 @@
 | Air pump | 1 | 18.60 | Orion ODB5515-12LB | [RS Components](https://dk.rs-online.com/web/p/blaesere/1444135/) | |
 | PCB with components | 1 | ~15 | — | [JLCPCB](https://jlcpcb.com/) | Minimum order of 5 |
 | Coin cell battery | 1 | 0.20 | CR1220 | [RS Components](https://dk.rs-online.com/web/p/knapcellebatterier/8660653) | Powers the RTC |
-| Screw (M2) | 2 | 0.50 | — | [RS Components](https://dk.rs-online.com/web/p/maskinskruer/2326918) | Holds CO₂ sensor |
-| Bolt (M2) | 2 | 0.30 | — | [RS Components](https://dk.rs-online.com/web/p/sekskantmotrikker/2326936) | Holds CO₂ sensor |
+| Screw (M3) | 2 | 0.50 | — | [RS Components](https://dk.rs-online.com/web/p/maskinskruer/2326918) | Holds CO₂ sensor |
+| Bolt (M3) | 2 | 0.30 | — | [RS Components](https://dk.rs-online.com/web/p/sekskantmotrikker/2326936) | Holds CO₂ sensor |
 | Spacer | 2 | 0.40 | — | [RS Components](https://dk.rs-online.com/web/p/afstandsstykker/1363728) | Holds CO₂ sensor |
 | Wire | — | 4.17 | — | [RS Components](https://dk.rs-online.com/web/p/styrekabel/0409258) | Rubber sheathing preferred; buy required length |
 | Connector to battery | — | — | XT60 (suggested) | — | Optional; connects power cable to battery |
