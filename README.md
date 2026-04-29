@@ -59,18 +59,6 @@ Visit [JLCPCB](https://jlcpcb.com/) to order the PCB, this is done by uploading 
 
 ### Flashing the code onto the sensor 
 
-#### Using the SensorUploader.jar file 
-1. Download and install the [Java Delevopment Kit](https://www.oracle.com/au/java/technologies/downloads/). Remember to select the correct operating system before downloading.
-2. Download the [SensorUploader program](firmware/SensorUploader%20program).
-3. Open the file using Java.
-4. Now install the prerequisites by pressing the button **Install Prerequisites**
-5. If running on a windows computer, you might be directed the Zadig website. This is because your computer is missing the either the Libusb-win32 or libusbK driver. This driver is pre-installed on Mac and Linux.
-6. Open Zadig and plug in the USBASP ISP to a usb port.
-7. In Zadig select **Options → List All Devices** to install the the libusbK (Windows 11) or Libusb-win32 (Windows 10) driver. <br><img src="firmware/SensorUploader%20program/Zadig.png" width="250"><br>
-8. After the driver installation is done, return to the SensorUploader program and run the **Install Prerequisites** again to make sure all is correct.
-9. Set the **Measurement duration** and **Flushing duration**
-10. Press **Upload to Sensor**. This will take some time, and you might get a couple of warnings and errors, but hopefully the status bar should indicate that all went as planned. 
-
 #### Using the Arduino IDE
 1. Download and install the [Arduino IDE](https://www.arduino.cc/en/software).
 2. Install all required [libraries](libraries/README.md).
