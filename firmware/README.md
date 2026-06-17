@@ -1,24 +1,15 @@
 # Firmware
 
-Arduino sketches for the CH₄ and CO₂ sensor (Version 4).
+Micropython code for the CH₄ and CO₂ sensor (Version 3).
 
-> **Before uploading any sketch**, first run `rtc_setup/RTC_set.ino` once to synchronise the real-time clock with your computer.
-
-| Folder | Sketch | Use |
-|--------|--------|-----|
-| `normal_run/` | `Normal_run_code.ino` | Standard deployment — measures for 40 min, vents chamber for 20 min, repeats |
-| `no_pump/` | `No_pump_code.ino` | Continuous logging without activating the pump |
-| `calibration/` | `Calibration_code.ino` | Continuous run for sensor calibration; CO₂ not logged to save power |
-| `rtc_setup/` | `RTC_set.ino` | Sets the RTC to match the computer clock — upload once before deployment |
-
-## Required libraries
-
-Install all libraries listed in [`libraries/README.md`](../libraries/README.md) before compiling.
+| Folder  | Use |
+|--------|-----|
+| `normal_run/`  | Standard deployment — measures for 40 min, vents chamber for 20 min, repeats |
+| `run_all_time/` | Continuous logging without activating the pump |
 
 ## Board setup (MiniCore)
 
-1. Install [MiniCore](https://github.com/MCUdude/MiniCore?tab=readme-ov-file#how-to-install) in the Arduino IDE.
-2. Connect the sensor via a USBASP ISP programmer.
-3. Under **Tools → Board → MiniCore → ATmega328**, set options to match:
-
-<img src="../docs/Arduino_tools.png" width="250">
+1. Install Thonny 
+2. Connect the sensor via a USB-C cable.
+3. Install MicroPython onto the sensor either through Thonny or by drag-and-dropping the .uf2 file found [here](https://micropython.org/download/rp2-pico/rp2-pico-latest.uf2) onto the sensor drive.
+4. Transfer all the files from one of the code folders to the sensor through connecting in Thonny. This will also set the sensor clock according to the time of your computer.

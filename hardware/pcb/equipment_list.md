@@ -1,4 +1,4 @@
-# Equipment list — Version 4
+# Equipment list — Version 3
 
 > Links are provided for reference; most items are available from multiple suppliers.
 > The **Figaro methane sensor and connector** must be ordered through a Figaro distributor.
@@ -19,7 +19,7 @@
 | Spacer | 2 | 0.40 | — | [RS Components](https://dk.rs-online.com/web/p/afstandsstykker/1363728) | Holds CO₂ sensor |
 | Wire | — | 4.17 | — | [RS Components](https://dk.rs-online.com/web/p/styrekabel/0409258) | Rubber sheathing preferred; buy required length |
 | Connector to battery | — | — | XT60 (suggested) | — | Optional; connects power cable to battery |
-| USBASP isp | 1 | 1-5 | Buy from AliExpress or Ebay | [Fischl](https://www.fischl.de/usbasp/) | Link is to the creator, but can be bought from many places, just google |
+| USB-C cable | 1 | - | - | - | Should be able to do data transfer and not just power |
 | 12 V battery | 1 | 168.30 | 12.8 V 12 Ah LiFePO4 | [RS Components](https://dk.rs-online.com/web/p/genopladelige-batteripakker/1828654) | Price varies with capacity |
 
 **Total (without battery): ≈€130**
