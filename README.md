@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CH<sub>4</sub> and CO<sub>2</sub> DIY sensor with automated aeration
 
 This repository is dedicated to CH<sub>4</sub> and CO<sub>2</sub> sensors created by Jonas Stage Sø [(Sø et al., 2024)](https://doi.org/10.1029/2024JG008035) and [(Sø et al., 2023)](https://doi.org/10.1016/j.scitotenv.2023.162895).  
