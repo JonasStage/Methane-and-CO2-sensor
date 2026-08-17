@@ -8,7 +8,7 @@
 |------|-----|-----------|------|------|-------|
 | 2 GB SD card | 1 | 10.70 | — | [RS Components](https://dk.rs-online.com/web/p/sd-kort/1805789) | |
 | CO₂ sensor | 1 | 70.00 | K33-ELG SenseAir | [SenseAir](https://senseair.com/products/flexibility-counts/k33-elg/) | |
-| Pin headers | 1 | 0.61 | — | [RS Components](https://dk.rs-online.com/web/p/printstiftlister/2001483) | To connect CO₂ sensor to PCB |
+| Pin headers | 1 | 2.44 | — | [RS Components](https://dk.rs-online.com/web/p/printstiftlister/7666379) | To connect CO₂ sensor to PCB |
 | Figaro methane sensor | 1 | 5.39 | TGS2611-E00 | [Figaro](https://www.figarosensor.com/product/entry/tgs2611-e00.html) | |
 | Figaro connector | 1 | 1.74 | SR-6 | [Figaro](https://www.figarosensor.com/product/entry/sr6.html) | |
 | Air pump | 1 | 18.60 | Orion ODB5515-12LB | [RS Components](https://dk.rs-online.com/web/p/blaesere/1444135/) | |
